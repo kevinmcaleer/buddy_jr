@@ -54,7 +54,8 @@ class Arm():
             raise ValueError(f'The servo channel was greater than 1 - it was {channel}')
         
         if (target_angle) > 180 or (target_angle < 0):
-            raise ValueError(f'The angle value was outside the valid range or 0 to 180 - was {target_angle}')
+            # raise ValueError(f'The angle value was outside the valid range or 0 to 180 - was {target_angle}')
+            target_angle = 0
         
         print(f'self.kit.servo[{channel}].angle is {self.kit.servo[channel].angle}')
         current_angle = round(self.kit.servo[channel].angle,0)
@@ -112,6 +113,7 @@ class Arm():
         shoulder_angle_deg = degrees(shoulder_angle)
         elbow_angle_deg = degrees(elbow_angle)
         camera_angle_deg = degrees(camera_angle) + 90
+        # camera_angle_deg = degrees(camera_angle)  
 
         return shoulder_angle_deg, elbow_angle_deg, camera_angle_deg
 
