@@ -41,3 +41,6 @@ async def main():
     )
 
     await asyncio.sleep(1)  # Use asyncio.sleep for async compatibility
+
+    if __name__ == "__main__":
+        asyncio.run(main())
