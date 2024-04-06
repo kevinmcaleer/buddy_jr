@@ -1,6 +1,9 @@
-from Adafruit_PCA9685 import PCA9685
+import board
+import busio
+import adafruit_pca9685
 
-pca = PCA9685()
+i2c = busio.I2C(board.SCL, board.SDA)
+pca = adafruit_pca9685.PCA9685(i2c)
 
 # Set the PWM frequency to 60hz
 pca.frequency = 60
