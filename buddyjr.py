@@ -1,4 +1,4 @@
-from adafruit_pca9685 import PCA9685
+from Adafruit_PCA9685 import PCA9685
 
 pca = PCA9685()
 
