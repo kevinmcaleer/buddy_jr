@@ -3,6 +3,7 @@ import busio
 from adafruit_servokit import ServoKit
 from time import sleep
 import asyncio
+
 # import time
 
 class Arm():
@@ -51,7 +52,7 @@ class Arm():
         current_angle = self.kit.servo[channel].angle
 
         # Calculate the total distance to move
-        angle_difference = target_angle - current_angle
+        angle_difference = target_angle - round(current_angle,1)
 
         # Define the number of steps you want to use
         steps = 60
@@ -72,9 +73,6 @@ class Arm():
     async def move_to_async(self, channel: int, duration: float, target_angle: int):
         print(f"Channel is {channel}")
         
-        if channel is None:
-            raise ValueError("Channel was None, it needs to be a value between 0 and 15")
-        
         if channel > 15:
             raise ValueError(f'The servo channel was greater than 1 - it was {channel}')
         
@@ -82,7 +80,7 @@ class Arm():
             raise ValueError('The angle value was outside the valid range or 0 to 180')
         
         print(f'self.kit.servo[{channel}].angle is {self.kit.servo[channel].angle}')
-        current_angle = self.kit.servo[channel].angle
+        current_angle = round(self.kit.servo[channel].angle,0)
 
         if current_angle is None:
             current_angle = 0  # or any other value you deem appropriate
@@ -91,7 +89,7 @@ class Arm():
         angle_difference = target_angle - current_angle
 
         # Define the number of steps you want to use
-        steps = 60
+        steps = 100
 
         # Calculate the time to wait between steps to achieve the overall duration
         sleep_duration = duration / steps
@@ -99,9 +97,13 @@ class Arm():
         # Calculate the angle to move at each step
         angle_step = angle_difference / steps
 
+        range_limit = self.kit.servo[channel].actuation_range
         for _ in range(steps):
             # Update the current angle
             current_angle += angle_step
+
+            if current_angle > range_limit:
+                continue
             self.kit.servo[channel].angle = current_angle
             # Async wait before the next step
             await asyncio.sleep(sleep_duration)
