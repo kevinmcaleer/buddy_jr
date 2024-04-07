@@ -28,12 +28,6 @@ class Arm():
         self.base.angle = 90
         self.shoulder.angle = 90
         self.elbow.angle = 90
-        self.camera = 90
-
-    def calibrate(self):
-        self.base.angle = 90
-        self.shoulder.angle = 90
-        self.elbow.angle = 90
         self.camera.angle = 90
 
     async def calibrate_async(self):

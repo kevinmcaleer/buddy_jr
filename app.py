@@ -4,7 +4,7 @@ import asyncio
 
 arm = Arm()
 
-arm.calibrate() # Set all the servo positions to 0
+# arm.calibrate() # Set all the servo positions to 0
 
 
 async def main():
