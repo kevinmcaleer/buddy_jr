@@ -9,6 +9,7 @@ from math import atan2, sqrt, pi, acos, degrees
 
 class Arm():
 
+    # Set the servo channels for each part of the arm
     BASE = 0
     SHOULDER = 1
     ELBOW = 2
@@ -25,29 +26,29 @@ class Arm():
         self.shoulder = self.kit.servo[self.SHOULDER]
         self.elbow = self.kit.servo[self.ELBOW]
         self.camera = self.kit.servo[self.CAMERA]
+
+        # Set initial angles
         self.base.angle = 90
         self.shoulder.angle = 90
         self.elbow.angle = 90
         self.camera = 90
 
-    def calibrate(self):
-        self.base.angle = 90
-        self.shoulder.angle = 90
-        self.elbow.angle = 90
-        self.camera.angle = 90
+    async def calibrate(self):
+        """ Moves all the servos to the middle position """
+        print('Calibrating\n')
 
-    async def calibrate_async(self):
-        print('Calibrating')
         print('setting base')
-        await self.move_to_async(channel = self.BASE, duration=2, target_angle=90)
+        await self.move_to(channel = self.BASE, duration=2, target_angle=90)
         print('setting shoulder')
-        await self.move_to_async(self.SHOULDER, 2, 90)
+        await self.move_to(self.SHOULDER, 2, 90)
         print('setting elbow')
-        await self.move_to_async(self.ELBOW, 2, 90)
+        await self.move_to(self.ELBOW, 2, 90)
         print('setting camera')
-        await self.move_to_async(self.CAMERA, 2, 90)
+        await self.move_to(self.CAMERA, 2, 90)
    
-    async def move_to_async(self, channel: int, duration: float, target_angle: int):
+    async def move_to(self, channel: int, duration: float, target_angle: int):
+        """ Move the servo to a target angle over a duration """
+        
         print(f"Channel is {channel}")
         
         if channel > 15:
