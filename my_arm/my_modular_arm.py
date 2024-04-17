@@ -12,6 +12,7 @@ from viam.resource.types import Model, ModelFamily
 from viam.utils import struct_to_dict
 from viam.components.servo import Servo
 
+# TODO: #1 add some return values to the functions, such as move_to_position, get_end_position, etc.
 
 class MyModularArm(Arm):
     # Subclass the Viam Arm component and implement the required functions
