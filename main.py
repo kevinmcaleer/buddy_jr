@@ -1,3 +1,5 @@
+# How do I register this in VIAM
+
 import asyncio
 
 from viam.module.module import Module

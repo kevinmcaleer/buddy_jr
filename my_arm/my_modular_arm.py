@@ -13,7 +13,7 @@ from viam.resource.types import Model, ModelFamily
 
 class MyModularArm(Arm):
     # Subclass the Viam Arm component and implement the required functions
-    MODEL: ClassVar[Model] = Model(ModelFamily("KevsRobots", "Buddy Jr"), "myarm")
+    MODEL: ClassVar[Model] = Model(ModelFamily("KevsRobots", "BuddyJr"), "myarm")
 
     def __init__(self, name: str):
         # Starting joint positions

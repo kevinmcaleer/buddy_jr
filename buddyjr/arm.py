@@ -1,3 +1,5 @@
+# This is a demo app to move the arm to a couple of positions
+
 import board
 import busio
 from adafruit_servokit import ServoKit
